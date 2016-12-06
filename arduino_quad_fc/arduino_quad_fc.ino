@@ -66,7 +66,16 @@ if (isnan(YAW_Union.hval) != 1) {
   angleY = YAW_Union.hval;  
 }
 
+#include
+#define MY_PIN 5  // Could choose any pin here
 
+volatile int pwm_value = 0;
+volatile int prev_time = 0;
+uint8_t latest_interrupted_pin;
+
+void setup () {
+  
+}
 
 
 
