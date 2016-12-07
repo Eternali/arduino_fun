@@ -74,8 +74,44 @@ volatile int prev_time = 0;
 uint8_t latest_interrupted_pin;
 
 void setup () {
-  
+  pinMode(MY_PIN, INPUT);
+  digitalWrite(MY_PIN, HIGH);
+  PCintPort::attachInterrupt(MY_PIN, &rising, RISING);
 }
+
+void rising () {
+  latest_interrupted_pin = PCintPort::arduinoPin;
+  PCintPort::attachInterrupt(latest_interrupted_pin, &falling, FALLING);
+  prev_time = micros();
+}
+
+void falling () {
+  latest_interrupted_pin = PCintPort::arduinoPin;
+  PCintPort::attachInterrupt(latest_interrupted_pin, &rising, RISING);
+  pwm_value = micros() - prev_time;  // now we have the latest PWM value  
+}
+
+// Project the received throttle signal into a valid motor speed range
+throttle = map(throttle_rx, THROTTLE_RMIN, THROTTLE_RMAX, MOTOR_ZERO_LEVEL, MOTOR_MAX_LEVEL);
+
+// Update setpoints from the receiver. Also some basic DSP here to allow
+// for noise and sensitivity on the RX controls...
+setpoint_update();
+
+// Update the measured angle values in the PID Controller
+pid_update();
+// Calculate PID output
+pid_compute();
+
+// Apply Roll and Pitch signals to the throttle value to calculate the new motor
+// output values. Yaw control disabled during stabilization testing...
+m0 = throttle + pid_pitch_out;  // + pid_yaw_out;
+m1 = throttle + pid_roll_out;  // - pid_yaw_out;
+m2 = throttle - pid_pitch_out;  // + pid_yaw_out;
+m3 = throttle - pid_roll_out;  // - pid_yaw_out;
+
+// Write the new values to motors
+update_motors(m0, m1, m2, m3);
 
 
 
