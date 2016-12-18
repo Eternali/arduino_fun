@@ -4,6 +4,7 @@
 // Author: Conrad Heidebrecht
 // Licenced under the GNU Public Licence
 
+#include "Config.h"
 #include <Math.h>
 #include <Servo.h>
 #include <Wire.h>
@@ -30,7 +31,11 @@ unsigned long prev_time = 0;
 
 
 void setup() {
-  
+  #ifdef DEBUG_OUTPUT
+    Serial.begin(115200);
+    while(!Serial);
+    Serial.println("Debug Output ON")
+  #endif  
 
 }
 
