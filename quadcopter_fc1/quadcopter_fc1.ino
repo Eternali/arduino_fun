@@ -37,9 +37,25 @@ void setup() {
     Serial.println("Debug Output ON")
   #endif  
 
+  init_motors();
+  init_leds();
+  init_rx();
+  init_pid();
+  arm_quad();
+
 }
 
 void loop() {
-  
+  update_imu();
+  update_control();
+
+  #ifdef DEBUG_OUTPUT
+    debug_process();
+  #endif
+
+  prev_time = micros();
 
 }
+
+
+
