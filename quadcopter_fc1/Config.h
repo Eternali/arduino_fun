@@ -59,7 +59,7 @@
 
 //------Motor PWM Levels--
 #define MOTOR_MIN_LEVEL 1000
-#define MOTOR_ARM_LEVEL 1500
+#define MOTOR_ARM_LEVEL 1100
 #define MOTOR_MAX_LEVEL 2000
 
 //------RX Pins-----------

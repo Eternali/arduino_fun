@@ -41,7 +41,7 @@ void setup() {
   init_leds();
   init_rx();
   init_pid();
-  arm_quad();
+  arm_motors();
 
 }
 
