@@ -45,7 +45,11 @@
 //------------------------
 
 //------IMU Config--------
-// Not sure if it is needed if using an integrated mpu
+// tune these to get useful readings
+#define GYROX_OFF 220
+#define GYROY_OFF 76
+#define GYROZ_OFF -85
+#define ACCZ_OFF 1788
 
 //------Debug Config------
 #define DEBUG_OUTPUT
@@ -63,11 +67,11 @@
 #define MOTOR_MAX_LEVEL 2000
 
 //------RX Pins-----------
-//#define RX_PINS_OFFSET 2
-#define PIN_RX_ROLL 2
+//#define RX_PINS_OFFSET 2   check if these are correct
+#define PIN_RX_ROLL 1
 #define PIN_RX_PITCH 3
-#define PIN_RX_THR 4
-#define PIN_RX_YAW 5
+#define PIN_RX_THR 8
+#define PIN_RX_YAW 12
 
 //------Motor Pins--------
 #define PIN_M0  6
