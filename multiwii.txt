@@ -1,0 +1,3 @@
+187-200 = nav and poshold PID gains (in multiwii.h)
+564 = HEADFREE (in config.h)
+
